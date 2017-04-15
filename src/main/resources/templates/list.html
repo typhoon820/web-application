@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th = "http://www.thymeleaf.org">
 <head>
     <title>Users</title>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8" />
 </head>
 <body>
-    <h2>  List of Users  </h2>
+    <h2>  List of Users   </h2>
         <table>
             <tr>
-                <td>Login</td> <td>Status</td>
-
-            </tr>
-            <tr>
-                <td>th:text = "${users.login}"</td> <td>th:text = "${users.password}"</td>
+                <td>SongName</td> <td>Author</td>
 
             </tr>
         </table>
-
+<table>
+    <tr th:each="song : ${songs}">
+        <td th:text="${song.songName}">&nbsp;</td>
+        <td th:text="${song.author}">&nbsp;</td>
+    </tr>
+</table>
 </body>
 </html>

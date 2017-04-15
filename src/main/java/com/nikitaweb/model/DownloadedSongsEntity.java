@@ -1,67 +1,60 @@
 package com.nikitaweb.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 /**
  * Created by Никита on 05.04.2017.
  */
 @Entity
 @Table(name = "downloaded_songs", schema = "testschema")
-@IdClass(DownloadedSongsEntityPK.class)
+
 public class DownloadedSongsEntity {
-    private int idSong;
-    private int idUser;
-    private String downloadTime;
 
-    @Id
-    @Column(name = "ID_song")
-    public int getIdSong() {
-        return idSong;
+    private Date downloadTime;
+
+    private SongsEntity song;
+    private UsersEntity user;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name= "ID_song")
+    public SongsEntity getSong(){
+        return song;
+    }
+    public void setSong(SongsEntity song){
+        this.song = song;
     }
 
-    public void setIdSong(int idSong) {
-        this.idSong = idSong;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID_user")
+    public UsersEntity getUser(){
+        return user;
+    }
+    public void setUser(UsersEntity user){
+        this.user = user;
     }
 
-    @Id
-    @Column(name = "ID_user")
-    public int getIdUser() {
-        return idUser;
+    @EmbeddedId
+    private DownloadedSongsEntityPK pkey;
+
+    public DownloadedSongsEntityPK getPkey() {
+        return pkey;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setPkey(DownloadedSongsEntityPK pkey) {
+        this.pkey = pkey;
     }
+
 
     @Basic
     @Column(name = "download_time")
-    public String getDownloadTime() {
+    public Date getDownloadTime() {
         return downloadTime;
     }
 
-    public void setDownloadTime(String downloadTime) {
+    public void setDownloadTime(Date downloadTime) {
         this.downloadTime = downloadTime;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        DownloadedSongsEntity that = (DownloadedSongsEntity) o;
-
-        if (idSong != that.idSong) return false;
-        if (idUser != that.idUser) return false;
-        if (downloadTime != null ? !downloadTime.equals(that.downloadTime) : that.downloadTime != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = idSong;
-        result = 31 * result + idUser;
-        result = 31 * result + (downloadTime != null ? downloadTime.hashCode() : 0);
-        return result;
-    }
 }

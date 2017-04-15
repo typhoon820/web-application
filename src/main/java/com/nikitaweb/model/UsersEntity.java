@@ -11,6 +11,7 @@ public class UsersEntity {
     private int idUser;
     private String login;
     private String password;
+    private UserStatusEntity userStatus;
 
     @Id
     @Column(name = "ID_user")
@@ -40,6 +41,24 @@ public class UsersEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "status_id")
+    public UserStatusEntity getUserStatus(){
+        return userStatus;
+    }
+
+    public void setUserStatus (UserStatusEntity userStatus){
+        this.userStatus = userStatus;
+    }
+
+    @Override
+    public String toString(){
+        return String.format(
+                "login=%s, status=%s",
+                login,userStatus.getStatus()
+        );
     }
 
     @Override

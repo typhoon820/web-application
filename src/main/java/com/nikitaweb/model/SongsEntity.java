@@ -11,6 +11,18 @@ public class SongsEntity {
     private String songName;
     private int idSong;
     private Integer downloadCount;
+    private AuthorsEntity author;
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID_author")
+    public AuthorsEntity getAuthor(){
+        return author;
+    }
+    public void setAuthor(AuthorsEntity author){
+        this.author = author;
+    }
+
 
     @Basic
     @Column(name = "song_name")

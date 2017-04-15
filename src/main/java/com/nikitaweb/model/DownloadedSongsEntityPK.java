@@ -1,18 +1,15 @@
 package com.nikitaweb.model;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by Никита on 05.04.2017.
- */
+@Embeddable
 public class DownloadedSongsEntityPK implements Serializable {
+
     private int idSong;
     private int idUser;
 
     @Column(name = "ID_song")
-    @Id
     public int getIdSong() {
         return idSong;
     }
@@ -22,7 +19,6 @@ public class DownloadedSongsEntityPK implements Serializable {
     }
 
     @Column(name = "ID_user")
-    @Id
     public int getIdUser() {
         return idUser;
     }
