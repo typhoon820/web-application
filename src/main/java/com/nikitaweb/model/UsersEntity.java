@@ -1,6 +1,7 @@
 package com.nikitaweb.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Никита on 05.04.2017.
@@ -12,6 +13,19 @@ public class UsersEntity {
     private String login;
     private String password;
     private UserStatusEntity userStatus;
+
+    private List<SongsEntity> songs;
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinTable(name = "downloaded_songs",
+            joinColumns = @JoinColumn(name = "ID_user"),
+            inverseJoinColumns = @JoinColumn(name = "ID_song"))
+    public List<SongsEntity> getSongs(){
+        return songs;
+    }
+    public void setSongs(List<SongsEntity> songs){
+        this.songs = songs;
+    }
+
 
     @Id
     @Column(name = "ID_user")

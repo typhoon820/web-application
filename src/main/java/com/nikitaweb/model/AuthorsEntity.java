@@ -1,6 +1,9 @@
 package com.nikitaweb.model;
 
 import javax.persistence.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Никита on 05.04.2017.
@@ -10,7 +13,15 @@ import javax.persistence.*;
 public class AuthorsEntity {
     private int idAuthor;
     private String name;
+    private Set<SongsEntity> songs = new HashSet<>();
 
+    @OneToMany(mappedBy = "author")
+    public Set<SongsEntity> getSongs(){
+        return songs;
+    }
+    public void setSongs(Set<SongsEntity> songs){
+        this.songs = songs;
+    }
     @Id
     @Column(name = "ID_author")
     public int getIdAuthor() {

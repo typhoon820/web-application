@@ -10,7 +10,17 @@ import javax.persistence.*;
 public class UserStatusEntity {
     private String status;
     private int statusId;
+    private UsersEntity user;
 
+
+    @OneToOne
+    @JoinColumn(name = "status_id")
+    public UsersEntity getUser(){
+        return user;
+    }
+    public void setUser(UsersEntity user){
+        this.user = user;
+    }
     @Basic
     @Column(name = "status")
     public String getStatus() {
@@ -51,3 +61,4 @@ public class UserStatusEntity {
         return result;
     }
 }
+
