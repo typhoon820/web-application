@@ -14,7 +14,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-public class   DatabaseConfig {
+public class DatabaseConfig {
 
     @Value("${spring.datasource.driver-class-name}")
     private String DB_DRIVER;
@@ -32,6 +32,8 @@ public class   DatabaseConfig {
     private String HIBERNATE_HBM2DDL_AUTO;
     @Value("${entitymanager.packagesToScan}")
     private String ENTITYMANAGER_PACKAGES_TO_SCAN;
+    @Value("${spring.jpa.hibernate.use-new-id-generator-mappings}")
+    private String HIBERNATE_MAPPINGS;
 
     @Bean
     public DataSource dataSource() {
@@ -52,6 +54,7 @@ public class   DatabaseConfig {
         hibernateProperties.put("spring.jpa.properties.dialect", HIBERNATE_DIALECT);
         hibernateProperties.put("spring.jpa.show-sql", HIBERNATE_SHOW_SQL);
         hibernateProperties.put("spring.jpa.hibernate.ddl-auto", HIBERNATE_HBM2DDL_AUTO);
+        hibernateProperties.put("spring.jpa.hibernate.use-new-id-generator-mappings", HIBERNATE_MAPPINGS);
         sessionFactoryBean.setHibernateProperties(hibernateProperties);
         return sessionFactoryBean;
 

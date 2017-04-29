@@ -6,6 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 @Repository("userDao")
@@ -16,12 +17,21 @@ public class UserDaoImpl extends AbstractDAO<Integer,UsersEntity> implements Use
         criteria.add(Restrictions.eq("idUser",id));
         return (UsersEntity)criteria.uniqueResult();
     }
+    @Override
+    public UsersEntity findByLogin(String login){
+        Query query = getSession().createSQLQuery("SELECT login,password,status_id from users u where u.login = :login");
+        query.setParameter("login",login);
+        if (query.list().isEmpty()) return null;
+        return (UsersEntity)query.list().get(0);
+       /* Criteria criteria = getSession().createCriteria(UsersEntity.class);
+        return (UsersEntity)criteria.add(Restrictions.eq("login",login)).uniqueResult();*/
+    }
     public void updateUser (UsersEntity user){
         getSession().update(user);
     }
     @Override
     public void saveUser(UsersEntity user) {
-        persist(user);
+        getSession().save(user);
 
     }
 

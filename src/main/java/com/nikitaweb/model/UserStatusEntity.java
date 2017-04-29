@@ -14,7 +14,7 @@ public class UserStatusEntity {
 
 
     @OneToOne
-    @JoinColumn(name = "status_id")
+    @JoinColumn(name = "id")
     public UsersEntity getUser(){
         return user;
     }
@@ -22,7 +22,7 @@ public class UserStatusEntity {
         this.user = user;
     }
     @Basic
-    @Column(name = "status")
+    @Column(name = "status", columnDefinition = "String default User")
     public String getStatus() {
         return status;
     }
@@ -32,7 +32,8 @@ public class UserStatusEntity {
     }
 
     @Id
-    @Column(name = "status_id")
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getStatusId() {
         return statusId;
     }

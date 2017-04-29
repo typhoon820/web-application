@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface UserService {
     UsersEntity findById(int id);
+    UsersEntity findByLogin(String login);
 
     void saveUser(UsersEntity user);
 

@@ -1,6 +1,7 @@
 package com.nikitaweb.dao;
 
 import com.nikitaweb.model.UsersEntity;
+import com.sun.javafx.scene.traversal.SceneTraversalEngine;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  */
 public interface UserDao {
     UsersEntity findById(int id);
+    UsersEntity findByLogin(String login);
 
     void saveUser(UsersEntity user);
 

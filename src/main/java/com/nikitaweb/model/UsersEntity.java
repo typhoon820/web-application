@@ -1,6 +1,11 @@
 package com.nikitaweb.model;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -14,8 +19,13 @@ public class UsersEntity {
     private String password;
     private UserStatusEntity userStatus;
 
+
     private List<SongsEntity> songs;
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+
+
+
+
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinTable(name = "downloaded_songs",
             joinColumns = @JoinColumn(name = "ID_user"),
             inverseJoinColumns = @JoinColumn(name = "ID_song"))
@@ -28,6 +38,7 @@ public class UsersEntity {
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_user")
     public int getIdUser() {
         return idUser;
@@ -38,7 +49,8 @@ public class UsersEntity {
     }
 
     @Basic
-    @Column(name = "login")
+    @Column(name = "login",unique = true)
+    @Size(min =2, max = 32)
     public String getLogin() {
         return login;
     }
@@ -49,6 +61,8 @@ public class UsersEntity {
 
     @Basic
     @Column(name = "password")
+    @Size(min = 4, message = "*Your passowrd has to be at least 4 characters")
+    @NotEmpty(message = "*Provide ypur password")
     public String getPassword() {
         return password;
     }
@@ -58,7 +72,7 @@ public class UsersEntity {
     }
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "status_id")
+    @JoinColumn(name = "status_id", columnDefinition = "int default 2")
     public UserStatusEntity getUserStatus(){
         return userStatus;
     }
@@ -66,6 +80,9 @@ public class UsersEntity {
     public void setUserStatus (UserStatusEntity userStatus){
         this.userStatus = userStatus;
     }
+
+
+
 
     @Override
     public String toString(){

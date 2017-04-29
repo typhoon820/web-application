@@ -6,16 +6,15 @@
 </head>
 <body>
     <h2>  List of Users   </h2>
-        <table>
-            <tr>
-                <td>SongName</td> <td>Author</td>
 
-            </tr>
-        </table>
 <table>
+    <tr>
+        <td>SongName</td> <td>Author</td>
+
+    </tr>
     <tr th:each="song : ${songs}">
         <td th:text="${song.songName}">&nbsp;</td>
-        <td th:text="${song.author}">&nbsp;</td>
+        <td th:text="${song.author.name}">&nbsp;</td>
     </tr>
 </table>
 </body>
