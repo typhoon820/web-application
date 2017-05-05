@@ -2,7 +2,8 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Registration Form</title>
+    <title>Admin home</title>
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" href="../static/css/reg-style.css" th:href="@{/css/reg-style.css}"/>
     <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -10,23 +11,29 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<form th:action="@{/login}" method="get">
-    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button>
-</form>
+<nav class = "my-navbar navbar navbar-default">
+    <div class="container">
+        <div>
+            <ul class = "mn-primarymenu nav navbar-nav navbar-right">
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/login}">Login</a></li>
+                <li class = "active"><a th:href="@{/admin}">Profile</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 <div class="container">
-    <h2 align="center">Registration Form</h2>
+    <h2 align="center" th:text="${userName}"></h2>
     <div class="row">
         <div class="col-md-8 col-md-offset-3">
-            <form autocomplete="off" action="#" th:action="@{/registration}"
+            <form autocomplete="off" th:action="@{/admin}"
                   th:object="${user}" method="post" class="form-horizontal"
                   role="form">
 
                 <div class="form-group">
                     <div class="col-sm-9">
 
-                        <label th:if="${#fields.hasErrors('login')}" th:errors="*{login}"
-                               class="validation-message"></label>
 
                         <input type="text" th:field="*{login}" placeholder="login"
                                class="form-control"/>
@@ -37,9 +44,17 @@
                 <div class="form-group">
                     <div class="col-sm-9">
 
-                        <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
-                                class="validation-message"></label>
+
                         <input type="password" th:field="*{password}"
+                               placeholder="password" class="form-control"  />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+
+
+                        <input type="text" th:field="*{userStatus}"
                                placeholder="password" class="form-control"  />
                     </div>
                 </div>

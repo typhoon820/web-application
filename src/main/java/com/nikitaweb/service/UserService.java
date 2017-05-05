@@ -1,5 +1,6 @@
 package com.nikitaweb.service;
 
+import com.nikitaweb.model.UserStatusEntity;
 import com.nikitaweb.model.UsersEntity;
 
 import java.util.List;
@@ -13,6 +14,9 @@ public interface UserService {
 
     void saveUser(UsersEntity user);
 
+    void saveUser(UsersEntity user, boolean flag);
+
     void deleteUser(int id);
+    public void deleteUserByLogin(String login);
     List<UsersEntity> findAllUsers();
 }

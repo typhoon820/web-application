@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -49,8 +50,9 @@ public class UsersEntity {
     }
 
     @Basic
+    @NotNull
     @Column(name = "login",unique = true)
-    @Size(min =2, max = 32)
+    @Size(min =3, max = 32,message = "*Your login has to be between 3 and 32 characters")
     public String getLogin() {
         return login;
     }
@@ -62,7 +64,7 @@ public class UsersEntity {
     @Basic
     @Column(name = "password")
     @Size(min = 4, message = "*Your passowrd has to be at least 4 characters")
-    @NotEmpty(message = "*Provide ypur password")
+    @NotNull(message = "*Provide your password")
     public String getPassword() {
         return password;
     }

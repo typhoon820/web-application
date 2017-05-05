@@ -1,0 +1,129 @@
+
+*{
+  margin: 0;
+  padding: 0;
+}
+html{
+
+  position: relative;
+  min-height: 100%;
+}
+body{
+  background-image: url(../img/background.jpg);
+  /*background-color: #cccccc;*/
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  background-position: top;
+  background-repeat: no-repeat;
+  height: 115%;
+  margin-bottom: 10%;
+}
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.my-navbar{
+
+background-color: transparent !important;
+border-color: transparent;
+background-image: none;
+box-shadow: none;
+font-family: 'Dosis', sans-serif;
+font-size: 24pt;
+
+}
+
+.my-navbar .navbar-brand{
+  color: #ecf0f1;
+  font-size: 24pt;
+}
+
+.my-navbar .navbar-brand:hover,
+.my-navbar .navbar-brand:focus{
+  color: #ecdbff;
+}
+.my-navbar .mn-primarymenu > li > a{
+  color :#ecf0f1;
+}
+.my-navbar .mn-primarymenu > li > a:hover,
+.my-navbar .mn-primarymenu > li > a:focus{
+  color: #ecdbff;
+}
+
+.my-navbar .mn-primarymenu > .active >a,
+.my-navbar .mn-primarymenu > .active >a:hover,
+.my-navbar .mn-primarymenu > .active >a:focus{
+  color: #ecdbff;
+  background-color: #8e44ad;
+}
+.my-navbar .mn-primarymenu > .open >a,
+.my-navbar .mn-primarymenu > .open >a:hover,
+.my-navbar .mn-primarymenu > .open >a:focus{
+  color: #ecdbff;
+  background-color: #8e44ad;
+}
+.cont > a,
+.cont > p > a{
+  color :#ecf0f1;
+  font-size: 16pt;
+}
+.cont >a:hover,
+.cont >a:focus,
+.cont >p>a:hover,
+.cont >p>a:focus{
+  color: #ecdbff;
+  background-color: #8e44ad;
+}
+
+.my-navbar .navbar-toggle{
+  border-color: #8e44ad;
+}
+.my-navbar .navbar-toggle:hover,
+.my-navbar .navbar-toggle:focus{
+  background-color: #8e44ad;
+}
+
+
+footer{
+  position:absolute;
+  bottom: -6%;
+  height: 6%;
+  width: 100%;
+  background-color: #111;
+  text-align: center;
+  font-family: 'Dosis', sans-serif;
+  font-size: 10pt;
+  color: white;
+}
+.info{
+
+
+  margin-right: 4%;
+  max-width: 75%;
+  text-align: center;
+  font-family: 'Dosis', sans-serif;
+  font-size: 24pt;
+  color: #ecf0f1;
+}
+
+.recomend img{
+  width: 100%;
+  -moz-transition: all, 0.5s;
+  -o-transition: all, 0.5s;
+  -webkit-transition: all, 0.5s;
+  transition: all, 0.5s;
+}
+.well{
+  margin-left: 20%;
+  background-color: #330842;
+  max-width: 80%;
+  text-align: center;
+  font-family: 'Dosis', sans-serif;
+  font-size: 14pt;
+  color: #ecf0f1;
+}
+.well img{
+  margin:auto;
+}

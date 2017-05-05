@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -45,20 +46,22 @@ public class LoginController {
         return modelAndView;
     }
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid UsersEntity user, BindingResult bindingResult) {
+    public ModelAndView createNewUser(@ModelAttribute("user") @Valid UsersEntity user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         UsersEntity userExists = userService.findByLogin(user.getLogin());
         if (userExists != null) {
             bindingResult
-                    .rejectValue("login", "error.user",
-                            "There is already a user registered with the login provided");
+                    .rejectValue("login", "error.login",
+                            "*There is already a user registered with the login provided");
+
         }
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("registration");
         } else {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
-            modelAndView.addObject("user", new UsersEntity());
+            modelAndView.addObject("login", user.getLogin());
+            modelAndView.addObject("password", user.getPassword());
             modelAndView.setViewName("registration");
 
         }

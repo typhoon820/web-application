@@ -5,12 +5,15 @@ package com.nikitaweb.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.sql.DataSource;
 import javax.validation.Valid;
@@ -19,6 +22,9 @@ import javax.validation.Valid;
 @Configuration
 @EnableWebSecurity
 public class AppConfig extends WebSecurityConfigurerAdapter{
+
+    @Autowired
+    BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     DataSource dataSource;
@@ -32,15 +38,17 @@ public class AppConfig extends WebSecurityConfigurerAdapter{
     public void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.jdbcAuthentication().usersByUsernameQuery(usersQuery)
         .authoritiesByUsernameQuery(rolesQuery)
-        .dataSource(dataSource);
+        .dataSource(dataSource)
+        .passwordEncoder(passwordEncoder);
     }
 
     @Override
     protected void configure (HttpSecurity httpSecurity) throws Exception{
         httpSecurity.authorizeRequests()
                 .antMatchers("/registration").permitAll()
+                .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/songs").hasAuthority("Admin").anyRequest()
+                .antMatchers("/home/admin").hasAuthority("Admin").anyRequest()
                 .authenticated().and().csrf().disable()
                 .formLogin()
                 .loginPage("/login")
@@ -49,5 +57,11 @@ public class AppConfig extends WebSecurityConfigurerAdapter{
                 .passwordParameter("password")
                 .and()
                 .logout().permitAll();
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception{
+        web.ignoring()
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/img/**");
     }
 }

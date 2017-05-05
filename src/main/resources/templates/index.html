@@ -1,9 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Hello</title>
-</head>
-<body>
-<h1>DIS IS INDOKS!!! привет</h1>
-</body>
-</html> b
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap Template</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet"/>
+    <link href="../static/css/bootstrap.css" th:href="@{../css/bootstrap.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{../css/style.css}"/>
+
+  </head>
+  <body>
+    <div class="wrapper">
+    <nav class = "my-navbar navbar navbar-default">
+      <div class="container">
+
+        <div>
+          <ul class = "mn-primarymenu nav navbar-nav navbar-right">
+            <li class = "active"><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/login}">Login</a></li>
+            <li><a th:href="@{/admin}">Profile</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="content">
+      <div class="container">
+        <div class="well well-md">Lorem ipsum dolor sit amet,
+          consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris
+          nisi ut aliquip ex ea commodo consequat. Duis aute irure
+          dolor in reprehenderit in voluptate velit esse cillum dolore
+          eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum.
+          Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad
+            minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure
+            dolor in reprehenderit in voluptate velit esse cillum dolore
+            eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+            sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Ut enim ad
+              minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure
+              dolor in reprehenderit in voluptate velit esse cillum dolore
+              eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+          <img class = "img-responsive" th:src="@{/img/4.jpg}" alt="" width="460" height="245"/>
+        </div>
+      </div>
+    </div>
+    <div class="info container">
+      <p>You can find us here</p>
+
+    <div th:id="map" style = "height: 500px;"></div>
+  </div>
+
+      <script th:inline="javascript">
+        function initMap() {
+          var myCenter = {lat: 51.702643, lng: 39.181727};
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 16,
+            center: myCenter
+          });
+          var marker = new google.maps.Marker({
+            position: myCenter,
+            map: map
+          });
+        }
+      </script>
+      <script th:inline="javascript"
+              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcafLBFeRl8WGp0M6xeadJ09VzJhQJ-O8&amp;callback=initMap">
+      </script>
+    <footer>
+      <div class="cont container">
+        <a href="#" title = "vk.com">Nikita Vasilyev</a>
+        <p><a href="#">MusicShop</a></p>
+
+
+      </div>
+    </footer>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../static/js/bootstrap.js"></script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+body{
+    background-image: url(../img/plain_wall.jpg);
+    /*background-color: #cccccc;*/
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    background-position: top;
+    background-repeat: no-repeat;
+    height: 115%;
+    margin-bottom: 10%;
+    font-family: 'Dosis', sans-serif;
+}
+.container {
+    font-size: 24pt;
+    color: #ecf0f1;
+}

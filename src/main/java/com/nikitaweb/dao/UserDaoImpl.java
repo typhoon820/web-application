@@ -19,12 +19,12 @@ public class UserDaoImpl extends AbstractDAO<Integer,UsersEntity> implements Use
     }
     @Override
     public UsersEntity findByLogin(String login){
-        Query query = getSession().createSQLQuery("SELECT login,password,status_id from users u where u.login = :login");
+        /*Query query = getSession().createSQLQuery("SELECT login,password,status_id from users u where u.login = :login");
         query.setParameter("login",login);
         if (query.list().isEmpty()) return null;
-        return (UsersEntity)query.list().get(0);
-       /* Criteria criteria = getSession().createCriteria(UsersEntity.class);
-        return (UsersEntity)criteria.add(Restrictions.eq("login",login)).uniqueResult();*/
+        return (UsersEntity)query.list().get(0);*/
+        Criteria criteria = getSession().createCriteria(UsersEntity.class);
+        return (UsersEntity)criteria.add(Restrictions.eq("login",login)).uniqueResult();
     }
     public void updateUser (UsersEntity user){
         getSession().update(user);
