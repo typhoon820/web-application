@@ -73,7 +73,7 @@ public class UsersEntity {
         this.password = password;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id", columnDefinition = "int default 2")
     public UserStatusEntity getUserStatus(){
         return userStatus;

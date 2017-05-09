@@ -47,6 +47,7 @@ public class SongsEntity {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_song")
     public int getIdSong() {
         return idSong;

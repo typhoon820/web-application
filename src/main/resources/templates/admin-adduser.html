@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Admin home</title>
+    <title>Add user</title>
     <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" href="../static/css/reg-style.css" th:href="@{/css/reg-style.css}"/>
     <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet"/>
@@ -17,7 +17,7 @@
             <ul class = "mn-primarymenu nav navbar-nav navbar-right">
                 <li><a th:href="@{/}">Home</a></li>
                 <li><a th:href="@{/login}">Login</a></li>
-                <li class = "active"><a th:href="@{/admin}">Profile</a></li>
+                <li class = "active"><a th:href="@{/home}">Profile</a></li>
             </ul>
         </div>
     </div>
@@ -27,14 +27,15 @@
     <h2 align="center" th:text="${userName}"></h2>
     <div class="row">
         <div class="col-md-8 col-md-offset-3">
-            <form autocomplete="off" th:action="@{/admin}"
+            <form autocomplete="off" th:action="@{/home/adduser}"
                   th:object="${user}" method="post" class="form-horizontal"
                   role="form">
 
                 <div class="form-group">
                     <div class="col-sm-9">
 
-
+                        <label th:if="${#fields.hasErrors('login')}" th:errors="*{login}"
+                               class="validation-message"></label>
                         <input type="text" th:field="*{login}" placeholder="login"
                                class="form-control"/>
 
@@ -43,7 +44,8 @@
 
                 <div class="form-group">
                     <div class="col-sm-9">
-
+                        <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                               class="validation-message"></label>
 
                         <input type="password" th:field="*{password}"
                                placeholder="password" class="form-control"  />
@@ -52,10 +54,12 @@
 
                 <div class="form-group">
                     <div class="col-sm-9">
+                        <select class="form-control" th:field="*{userStatus}">
+                            <option th:each="userSt:${statuses}" th:value="${{userSt}}" th:text="${userSt.status}">
+                            </option>
 
+                        </select>
 
-                        <input type="text" th:field="*{userStatus}"
-                               placeholder="password" class="form-control"  />
                     </div>
                 </div>
 

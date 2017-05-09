@@ -22,7 +22,13 @@ public class SongDaoImpl extends AbstractDAO<Integer,SongsEntity> implements Son
         criteria.add(Restrictions.eq("idSong",id));
         return (SongsEntity) criteria.uniqueResult();
     }
-
+    @Override
+    public SongsEntity findByFullSongName(String songName, AuthorsEntity author){
+        Criteria criteria = getSession().createCriteria(SongsEntity.class);
+        criteria.add(Restrictions.eq("songName",songName));
+        criteria.add(Restrictions.eq("author", author));
+        return (SongsEntity) criteria.uniqueResult();
+    }
     @Override
     public void saveSong(SongsEntity song) {
         persist(song);

@@ -8,16 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.ParameterizedType;
 
-/**
- * Created by Никита on 05.04.2017.
- */
+
 public abstract class AbstractDAO <K,E>{
 
     private final Class<K> persisatnceClass;
     @Autowired
     SessionFactory _sessionFactory ;
-
-
 
 
     @SuppressWarnings("unchecked")

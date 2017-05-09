@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface SongDao {
     SongsEntity findById(int id);
+    SongsEntity findByFullSongName(String songName, AuthorsEntity author);
     void saveSong (SongsEntity song);
     void deleteSong(int id);
     List<SongsEntity> findAllSongs();

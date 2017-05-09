@@ -28,6 +28,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired
     DataSource dataSource;
+
     @Value("${spring.queries.user-query}")
     private String usersQuery;
 

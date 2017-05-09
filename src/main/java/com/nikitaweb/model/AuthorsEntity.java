@@ -1,6 +1,7 @@
 package com.nikitaweb.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +24,7 @@ public class AuthorsEntity {
         this.songs = songs;
     }
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_author")
     public int getIdAuthor() {
         return idAuthor;
@@ -34,6 +35,7 @@ public class AuthorsEntity {
     }
 
     @Basic
+    @NotNull
     @Column(name = "name")
     public String getName() {
         return name;

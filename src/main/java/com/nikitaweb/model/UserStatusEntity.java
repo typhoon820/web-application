@@ -1,6 +1,7 @@
 package com.nikitaweb.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Никита on 05.04.2017.
@@ -9,17 +10,16 @@ import javax.persistence.*;
 @Table(name = "user_status", schema = "testschema")
 public class UserStatusEntity {
     private String status;
-    private int statusId;
-    private UsersEntity user;
+    private int id;
+    private List<UsersEntity> user;
 
 
-    @OneToOne
-    @JoinColumn(name = "id")
-    public UsersEntity getUser(){
+    @OneToMany(mappedBy = "userStatus")
+    public List<UsersEntity> getUsers(){
         return user;
     }
-    public void setUser(UsersEntity user){
-        this.user = user;
+    public void setUsers(List<UsersEntity> users){
+        this.user = users;
     }
     @Basic
     @Column(name = "status", columnDefinition = "String default User")
@@ -28,18 +28,22 @@ public class UserStatusEntity {
     }
 
     public void setStatus(String status) {
+        if(status == null){
+            if (this.id ==1) this.status = "Admin";
+            else this.status = "User";
+        }
         this.status = status;
     }
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public int getStatusId() {
-        return statusId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public int getId() {
+        return id;
     }
 
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
@@ -49,7 +53,7 @@ public class UserStatusEntity {
 
         UserStatusEntity that = (UserStatusEntity) o;
 
-        if (statusId != that.statusId) return false;
+        if (id != that.id) return false;
         if (status != null ? !status.equals(that.status) : that.status != null) return false;
 
         return true;
@@ -58,8 +62,12 @@ public class UserStatusEntity {
     @Override
     public int hashCode() {
         int result = status != null ? status.hashCode() : 0;
-        result = 31 * result + statusId;
+        result = 31 * result + id;
         return result;
+    }
+    @Override
+    public String toString(){
+        return status;
     }
 }
 

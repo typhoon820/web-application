@@ -46,12 +46,20 @@ public class UserServiceImpl implements UserService{
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setUserStatus(status);
         logger.info("Password is  " +user.getPassword());
+
         userDao.saveUser(user);
     }
     @Override
     public void saveUser(UsersEntity user, boolean flag){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        //user.setUserStatus(status);
+        user.setPassword(passwordEncoder.encode(user.getPassword())); //TODO: раскомментить это все, с преобрпзователем работает плохо.
+                                                                      //TODO: в Thymeleaf изменить выбор роли.
+        //user.setUserStatus(user.getUserStatus());
+        /*int statusid = user.getUserStatus().getStatusId();
+        UserStatusEntity st = user.getUserStatus();
+        st.setStatus(statusid==3?"Admin":"User");
+        user.setUserStatus(st);*/
+        logger.info("Status is "+ user.getUserStatus().getStatus());
+        logger.info("status_id is "+ user.getUserStatus().getId());
         userDao.saveUser(user);
     }
     @Override
