@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service("SongService")
 @Transactional
-public class SongServiceImpl implements SongService {
+public class  SongServiceImpl implements SongService {
     private static final Logger logger = LoggerFactory.getLogger(SongServiceImpl.class);
     @Autowired
     SongDao songDao;
@@ -58,5 +58,15 @@ public class SongServiceImpl implements SongService {
     @Override
     public List<SongsEntity> findAllSongs() {
         return songDao.findAllSongs();
+    }
+
+    @Override
+    public List<SongsEntity> findByAuthor(AuthorsEntity author) {
+        return songDao.findByAuthor(author);
+    }
+
+    @Override
+    public List<SongsEntity> findByName(String songName) {
+        return songDao.findByName(songName);
     }
 }

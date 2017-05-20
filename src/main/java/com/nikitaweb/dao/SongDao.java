@@ -12,5 +12,6 @@ public interface SongDao {
     void saveSong (SongsEntity song);
     void deleteSong(int id);
     List<SongsEntity> findAllSongs();
-
+    List<SongsEntity> findByAuthor(AuthorsEntity author);
+    List<SongsEntity> findByName(String songName);
 }

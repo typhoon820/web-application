@@ -14,7 +14,7 @@ public class SongsEntity {
     private Integer downloadCount;
     private AuthorsEntity author;
     private List<UsersEntity> users;
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY )
     @JoinTable(name = "downloaded_songs",
             joinColumns = @JoinColumn(name = "ID_song"),
             inverseJoinColumns = @JoinColumn(name = "ID_user"))

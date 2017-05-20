@@ -49,7 +49,8 @@ public class AppConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/home/admin").hasAuthority("Admin").anyRequest()
+                .antMatchers("/home/adduser").hasAuthority("Admin")
+                .antMatchers("/home/addsong").hasAuthority("Admin").anyRequest()
                 .authenticated().and().csrf().disable()
                 .formLogin()
                 .loginPage("/login")
@@ -57,7 +58,10 @@ public class AppConfig extends WebSecurityConfigurerAdapter{
                 .usernameParameter("login")
                 .passwordParameter("password")
                 .and()
-                .logout().permitAll();
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
+                .permitAll();
     }
 
     @Override

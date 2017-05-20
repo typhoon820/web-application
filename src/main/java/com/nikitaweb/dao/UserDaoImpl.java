@@ -1,5 +1,6 @@
 package com.nikitaweb.dao;
 
+import com.nikitaweb.model.SongsEntity;
 import com.nikitaweb.model.UsersEntity;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
-@Repository("userDao")
+@Repository("UserDao")
 public class UserDaoImpl extends AbstractDAO<Integer,UsersEntity> implements UserDao {
     @Override
     public UsersEntity findById(int id) {
@@ -46,5 +47,23 @@ public class UserDaoImpl extends AbstractDAO<Integer,UsersEntity> implements Use
     public List<UsersEntity> findAllUsers() {
         Criteria criteria = getSession().createCriteria(UsersEntity.class);
         return (List<UsersEntity>) criteria.list();
+    }
+
+    @Override
+    public void deleteSong(UsersEntity user, SongsEntity song) {
+        Query query = getSession().createSQLQuery("DELETE FROM downloaded_songs " +
+                "WHERE ID_user = :idUser AND ID_song = :idSong");
+        query.setInteger("idUser", user.getIdUser());
+        query.setInteger("idSong", song.getIdSong());
+        query.executeUpdate();
+    }
+
+    @Override
+    public void addSong(UsersEntity user, SongsEntity song) {
+        Query query = getSession().createSQLQuery("INSERT INTO downloaded_songs (ID_user,ID_song)" +
+                "VALUES (:idUser, :idSong  )");
+        query.setInteger("idUser", user.getIdUser());
+        query.setInteger("idSong", song.getIdSong());
+        query.executeUpdate();
     }
 }

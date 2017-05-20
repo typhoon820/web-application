@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:pages="http://pagesdialect.sourceforge.net">
+<html xmlns:th = "http://www.thymeleaf.org">
 <head>
     <title>Song List</title>
     <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet"/>
@@ -27,40 +27,45 @@
         </div>
     </nav>
     <div class="container">
+        <h2 align="center">  Wanna search for something?   </h2>
+    </div>
+
+    <div class="container">
         <form class="navbar-form" role="search" method="post" th:action="@{/search}" th:object="${searchStr}">
             <div class="input-group">
                 <input type="text" class="form-control" id="searchStr" name ="searchStr" placeholder="Search"/>
                 <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                 </div>
             </div>
         </form>
     </div>
-<div class="container">
-    <h2 align="center">  List of Songs   </h2>
-</div>
-<div class="container">
-    <table class="table table-hover">
-        <tr>
-            <td>SongName</td> <td>Author</td>
-            <td> </td>
-        </tr>
-        <form th:action="@{/add}" th:object="${song}" method="post" role="form">
-            <tr th:each="s : ${songs}" pages:paginate="10">
-                <td th:text="${s.songName}">&nbsp;</td>
-                <td th:text="${s.author.name}">&nbsp;</td>
-                <td>
-                    <button class="bt form-control"
-                            id="idSong"
-                            name="idSong"
-                            th:field="*{idSong}" th:value="${s.idSong}">
-                        add
-                    </button>
-                </td>
+    <div class="container">
+    <h2 align="center">Results</h2>
+    <h2 th:utext="${failMessage}"></h2>
+    </div>
+    <div class="container">
+        <table class="table table-hover">
+            <tr>
+                <td>SongName</td> <td>Author</td>
+                <td> </td>
             </tr>
-        </form>
-    </table>
-</div>
+            <form th:action="@{/add}" th:object="${song}" method="post" role="form">
+                <tr th:each="s : ${result}">
+                    <td th:text="${s.songName}">&nbsp;</td>
+                    <td th:text="${s.author.name}">&nbsp;</td>
+                    <td>
+                        <button class="bt form-control"
+                                id="idSong"
+                                name="idSong"
+                                th:field="*{idSong}" th:value="${s.idSong}">
+                            add
+                        </button>
+                    </td>
+                </tr>
+            </form>
+        </table>
+    </div>
 </div>
 </body>
 </html>

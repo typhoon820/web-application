@@ -15,7 +15,6 @@ public class DownloadedSongsEntity {
 
     @Id
     @Column(name = "ID_song")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getIdSong() {
         return idSong;
     }

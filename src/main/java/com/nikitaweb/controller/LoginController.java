@@ -30,13 +30,6 @@ public class LoginController {
         return "login";
     }
 
-    /*@RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(Model model){
-        UsersEntity user = new UsersEntity();
-        model.addAttribute("user",user);
-        return "registration";
-    }*/
-
     @RequestMapping(value="/registration", method = RequestMethod.GET)
     public ModelAndView registration(){
         ModelAndView modelAndView = new ModelAndView();
@@ -67,31 +60,5 @@ public class LoginController {
         }
         return modelAndView;
     }
-    /*
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String createNewUser(@Valid UsersEntity user, BindingResult bindingResult, Model model){
-        UsersEntity userExists = userService.findByLogin(user.getLogin());
-        if(userExists != null){
-            bindingResult.rejectValue("login",
-                    "error.login",
-                    "There is already a user registered with that login");
-        }
-        if(bindingResult.hasErrors()){
-            return "registration";
-        }
-        else{
-            userService.saveUser(user);
-            model.addAttribute("successMessage", "User has been successfully registered");
-            model.addAttribute("user", new UsersEntity());
-            return "registration";
-        }
-    }*/
-    @RequestMapping(value="/admin/home", method = RequestMethod.GET)
-    public String home(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UsersEntity user = userService.findByLogin(auth.getName());
-        model.addAttribute("userName", "Welcome "+user.getLogin()+"!!!");
-        model.addAttribute("adminMessage", "Content available only for Admins");
-        return "admin-home";
-    }
+
 }

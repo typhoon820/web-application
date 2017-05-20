@@ -48,4 +48,18 @@ public class SongDaoImpl extends AbstractDAO<Integer,SongsEntity> implements Son
         Criteria criteria = getSession().createCriteria(SongsEntity.class);
         return (List<SongsEntity>) criteria.list();
     }
+
+    @Override
+    public List<SongsEntity> findByAuthor(AuthorsEntity author) {
+        Criteria criteria = getSession().createCriteria(SongsEntity.class);
+        criteria.add(Restrictions.eq("author", author));
+        return (List<SongsEntity>) criteria.list();
+    }
+
+    @Override
+    public List<SongsEntity> findByName(String songName) {
+        Criteria criteria = getSession().createCriteria(SongsEntity.class);
+        criteria.add(Restrictions.eq("songName", songName));
+        return (List<SongsEntity>) criteria.list();
+    }
 }

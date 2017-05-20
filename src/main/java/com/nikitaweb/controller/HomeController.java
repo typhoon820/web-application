@@ -41,12 +41,14 @@ public class HomeController {
         ModelAndView model = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UsersEntity loggedUser = userService.findByLogin(auth.getName());
-        model.addObject("userName" ,"Welcome " + loggedUser.getLogin());
+        model.addObject("userName" ,"Hello, " + loggedUser.getLogin());
+        if (loggedUser.getUserStatus().equals(statusService.findById(1)))
         model.setViewName("admin");
+        else model.setViewName("user");
         return model;
     }
 
-   @RequestMapping(value = "/adduser", method = RequestMethod.GET)
+    @RequestMapping(value = "/adduser", method = RequestMethod.GET)
     public ModelAndView getForm() {
         ModelAndView model = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -109,4 +111,30 @@ public class HomeController {
         }
         return modelAndView;
     }
+
+    @RequestMapping(value = "/favourites", method = RequestMethod.GET)
+    public ModelAndView showFavourites(){
+        ModelAndView model = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UsersEntity loggedUser = userService.findByLogin(auth.getName());
+        model.addObject("greeting", loggedUser.getLogin()+", there are your favourite ones");
+        model.addObject("favSongs", loggedUser.getSongs());
+        model.addObject("delSong", new SongsEntity());
+        model.setViewName("favourites");
+        return model;
+    }
+    @RequestMapping (value = "/delete", method = RequestMethod.POST)
+    public ModelAndView deleteFavSong(@ModelAttribute("delSong") SongsEntity delSong, BindingResult bindingResult){
+        ModelAndView model = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UsersEntity loggedUser = userService.findByLogin(auth.getName());
+        delSong = songService.findById(delSong.getIdSong());
+        if(bindingResult.hasErrors()) model.setViewName("redirect:/home/favourites");
+        else{
+            userService.deleteSong(loggedUser, delSong);
+            model.setViewName("redirect:/home/favourites");
+        }
+        return model;
+    }
+
 }

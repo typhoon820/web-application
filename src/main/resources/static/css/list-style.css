@@ -1,18 +1,6 @@
-body{
-    background-image: url(../img/plain_wall.jpg);
-    /*background-color: #cccccc;*/
-    background-size: 100% 100%;
-    background-attachment: fixed;
-    background-position: top;
-    background-repeat: no-repeat;
-    height: 115%;
-    margin-bottom: 10%;
-
-}
-.container {
-    font-family: 'Dosis', sans-serif;
-    font-size: 24pt;
-    color: #ecf0f1;
+.table tbody tr:hover td{
+    background: mediumpurple;
+    opacity: 0.8;
 }
 .my-navbar{
 
@@ -53,4 +41,13 @@ body{
 .my-navbar .mn-primarymenu > .open >a:focus{
     color: #ecdbff;
     background-color: #8e44ad;
+}
+.bt{
+    background-image: url("../img/heart.png");
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+}
+.input-group{
+    margin-left:15%;
+    width: 80%;
 }

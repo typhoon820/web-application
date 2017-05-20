@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../static/css/reg-style.css" th:href="@{/css/reg-style.css}"/>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -27,15 +26,10 @@
 <div class ="container">
     <h2 align="center" th:text="${userName}"></h2>
 </div>
-<form th:action="@{/home/adduser}" method="get">
-    <button class="btn btn-md btn-success btn-block" type="Submit">Add new user</button>
-</form>
-<form th:action="@{/home/addsong}" method="get">
-    <button class="btn btn-md btn-success btn-block" type="Submit">Add new song</button>
-</form>
 <form th:action="@{/home/favourites}" method="get">
     <button class="btn btn-md btn-success btn-block" type="Submit">Show favourites</button>
 </form>
+
 <form th:action="@{/logout}" method="post">
     <button class="btn btn-md btn-warning btn-block" type="submit">Logout</button>
 </form>

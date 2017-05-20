@@ -24,9 +24,7 @@ public class UsersEntity {
     private List<SongsEntity> songs;
 
 
-
-
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "downloaded_songs",
             joinColumns = @JoinColumn(name = "ID_user"),
             inverseJoinColumns = @JoinColumn(name = "ID_song"))
@@ -36,6 +34,7 @@ public class UsersEntity {
     public void setSongs(List<SongsEntity> songs){
         this.songs = songs;
     }
+    public void addSong(SongsEntity song) {this.songs.add(song);}
 
 
     @Id

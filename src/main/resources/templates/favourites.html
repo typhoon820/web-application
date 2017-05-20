@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <title>Song List</title>
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet"/>
+
+
+    <link rel="stylesheet" href="../static/css/reg-style.css" th:href="@{/css/reg-style.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../static/css/list-style.css" th:href="@{/css/list-style.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    <nav class = "my-navbar navbar navbar-default">
+        <div class="container">
+
+            <div>
+                <ul class = "mn-primarymenu nav navbar-nav navbar-right">
+                    <li><a th:href="@{/}">Home</a></li>
+                    <li><a th:href="@{/login}">Login</a></li>
+                    <li><a th:href="@{/songs}">Songs</a></li>
+                    <li class="active"><a th:href="@{/home}">Profile</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h2 align="center" th:text="${greeting}"></h2>
+    </div>
+    <div class="container">
+        <table class="table table-hover">
+            <tr>
+                <td>SongName</td> <td>Author</td>
+                <td> </td>
+            </tr>
+            <form th:action="@{/home/delete}" th:object="${delSong}" method="post" role="form">
+                <tr th:each="s : ${favSongs}">
+                    <td th:text="${s.songName}">&nbsp;</td>
+                    <td th:text="${s.author.name}">&nbsp;</td>
+                    <td>
+                        <button class="bt form-control"
+                                id="idSong"
+                                name="idSong"
+                                th:field="*{idSong}" th:value="${s.idSong}">
+                            delete
+                        </button>
+                    </td>
+                </tr>
+            </form>
+        </table>
+    </div>
+</div>
+</body>
+</html>

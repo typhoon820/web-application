@@ -13,4 +13,6 @@ public interface SongService {
 
     void deleteUser(int id);
     List<SongsEntity> findAllSongs();
+    List<SongsEntity> findByAuthor(AuthorsEntity author);
+    List<SongsEntity> findByName(String songName);
 }

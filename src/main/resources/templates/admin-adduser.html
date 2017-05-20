@@ -3,10 +3,10 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add user</title>
-    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" href="../static/css/reg-style.css" th:href="@{/css/reg-style.css}"/>
     <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../static/css/reg-style.css" th:href="@{/css/reg-style.css}"/>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -17,6 +17,7 @@
             <ul class = "mn-primarymenu nav navbar-nav navbar-right">
                 <li><a th:href="@{/}">Home</a></li>
                 <li><a th:href="@{/login}">Login</a></li>
+                <li><a th:href="@{/songs}">Songs</a></li>
                 <li class = "active"><a th:href="@{/home}">Profile</a></li>
             </ul>
         </div>

@@ -3,6 +3,7 @@ package com.nikitaweb.service;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonAnyFormatVisitor;
 import com.nikitaweb.dao.UserDao;
 import com.nikitaweb.dao.UserStatusDao;
+import com.nikitaweb.model.SongsEntity;
 import com.nikitaweb.model.UserStatusEntity;
 import com.nikitaweb.model.UsersEntity;
 
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * Created by Никита on 05.04.2017.
  */
-@Service ("userService")
+@Service ("UserService")
 @Transactional
 public class UserServiceImpl implements UserService{
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
@@ -36,28 +37,37 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public void addSong(UsersEntity user,SongsEntity song){
+
+        userDao.addSong(user,song);
+        logger.info("NEW SONG INFO===================: "+ song.getSongName());
+        userDao.updateUser(user);
+    }
+    @Override
     public UsersEntity findByLogin(String login){return userDao.findByLogin(login);}
 
     @Override
     public void saveUser(UsersEntity user) {
 
-        UserStatusEntity status = userStatusDao.findById(2);
+        UserStatusEntity status = userStatusDao.findById(4);
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setUserStatus(status);
-        logger.info("Password is  " +user.getPassword());
 
+        logger.info("Password is  " +user.getPassword());
         userDao.saveUser(user);
     }
+
+    @Override
+    public void deleteSong(UsersEntity user, SongsEntity song) {
+        userDao.deleteSong(user, song);
+        userDao.updateUser(user);
+    }
+
     @Override
     public void saveUser(UsersEntity user, boolean flag){
         user.setPassword(passwordEncoder.encode(user.getPassword())); //TODO: раскомментить это все, с преобрпзователем работает плохо.
                                                                       //TODO: в Thymeleaf изменить выбор роли.
-        //user.setUserStatus(user.getUserStatus());
-        /*int statusid = user.getUserStatus().getStatusId();
-        UserStatusEntity st = user.getUserStatus();
-        st.setStatus(statusid==3?"Admin":"User");
-        user.setUserStatus(st);*/
         logger.info("Status is "+ user.getUserStatus().getStatus());
         logger.info("status_id is "+ user.getUserStatus().getId());
         userDao.saveUser(user);
