@@ -2,16 +2,13 @@ package com.nikitaweb.Validator;
 
 import com.nikitaweb.model.UsersEntity;
 import com.nikitaweb.service.UserService;
-import com.sun.xml.internal.bind.annotation.OverrideAnnotationOf;
-import com.sun.xml.internal.bind.v2.model.core.ErrorHandler;
-import org.springframework.beans.factory.ObjectFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import javax.jws.soap.SOAPBinding;
 
 @Component
 public class UserValidator implements Validator {

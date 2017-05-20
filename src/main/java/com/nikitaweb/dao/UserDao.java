@@ -2,9 +2,6 @@ package com.nikitaweb.dao;
 
 import com.nikitaweb.model.SongsEntity;
 import com.nikitaweb.model.UsersEntity;
-import com.sun.javafx.scene.traversal.SceneTraversalEngine;
-
-import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 /**

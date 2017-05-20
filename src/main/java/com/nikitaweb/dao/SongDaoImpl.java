@@ -2,7 +2,6 @@ package com.nikitaweb.dao;
 
 import com.nikitaweb.model.AuthorsEntity;
 import com.nikitaweb.model.SongsEntity;
-import com.nikitaweb.model.UsersEntity;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
@@ -13,7 +12,7 @@ import java.util.List;
 /**
  * Created by Никита on 15.04.2017.
  */
-@Repository("SongDao")
+@Repository("songDao")
 public class SongDaoImpl extends AbstractDAO<Integer,SongsEntity> implements SongDao {
 
     @Override
