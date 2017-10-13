@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository("AuthorsDao")
-public class AuthorsDaoImpl extends AbstractDAO<Integer,AuthorsEntity> implements AuthorsDao{
+public class  AuthorsDaoImpl extends AbstractDAO<Integer,AuthorsEntity> implements AuthorsDao{
     @Override
     public AuthorsEntity findById(int id) {
         Criteria criteria = getSession().createCriteria(AuthorsEntity.class);
